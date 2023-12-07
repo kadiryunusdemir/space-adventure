@@ -35,6 +35,7 @@ namespace Utilities
             }
         }
 
+        // var anObject = ObjectPoolManager.instance.Get(ObjectPoolType.AnObject).GetComponent<AnObject>();
         public GameObject Get(Enums.ObjectPoolType type)
         {
             ObjectPool targetPool = pools.Find(x => x.objectPoolType == type);
@@ -52,6 +53,7 @@ namespace Utilities
             return obj2;
         }
 
+        // ObjectPoolManager.instance.ReturnToPool(anObject);
         public void ReturnToPool(GameObject obj)
         { 
             Enums.ObjectPoolType type = obj.GetComponent<PoolObject>().type;
