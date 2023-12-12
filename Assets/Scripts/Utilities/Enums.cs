@@ -4,7 +4,8 @@ namespace Utilities
     {
         public enum ObjectPoolType
         {
-            Default = 0
+            Default = 0,
+            Enemy = 1,
         };
     }
 }
