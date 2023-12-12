@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Utilities
 {
@@ -9,33 +10,33 @@ namespace Utilities
     {
         [field: SerializeField] public int Number { get; private set; }
         [SerializeField] private int startingNumber;
-        [NonSerialized] private UnityEvent<int> intChangeEvent;
+        [NonSerialized] public UnityEvent<int> IntChangeEvent;
 
         private void OnEnable()
         {
             Number = startingNumber;
-            if (intChangeEvent == null)
+            if (IntChangeEvent == null)
             {
-                intChangeEvent = new UnityEvent<int>();
+                IntChangeEvent = new UnityEvent<int>();
             }
         }
         
         public void SetInt(int amount)
         {
             Number = amount;
-            intChangeEvent.Invoke(Number);
+            IntChangeEvent.Invoke(Number);
         }
 
         public void DecreaseInt(int amount)
         {
             Number -= amount;
-            intChangeEvent.Invoke(Number);  
+            IntChangeEvent.Invoke(Number);  
         }
     
         public void IncreaseInt(int amount)
         {
             Number += amount;
-            intChangeEvent.Invoke(Number);
+            IntChangeEvent.Invoke(Number);
         }
     }
 }
