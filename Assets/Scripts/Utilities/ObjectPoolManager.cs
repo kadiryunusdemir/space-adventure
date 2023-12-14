@@ -28,8 +28,8 @@ namespace Utilities
             {
                 for (int i = 0; i < pool.initialSize; i++)
                 {
-                    GameObject obj = Instantiate(pool.originalPrefab);
-                    obj.SetActive(false); 
+                    GameObject obj = Instantiate(pool.originalPrefab, this.transform, true);
+                    obj.SetActive(false);
                     pool.ObjectsInQueue.Enqueue(obj);
                 }
             }
@@ -55,7 +55,12 @@ namespace Utilities
 
         // ObjectPoolManager.instance.ReturnToPool(anObject);
         public void ReturnToPool(GameObject obj)
-        { 
+        {
+            if (obj == null)
+            {
+               return; 
+            }
+            
             Enums.ObjectPoolType type = obj.GetComponent<PoolObject>().type;
             ObjectPool targetPool = pools.Find(x => x.objectPoolType == type);
     

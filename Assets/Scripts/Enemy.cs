@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utilities;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private float speed = 5;
+    [SerializeField] private float speed = 3;
+    [SerializeField] private IntSO scoreSO;
+    [SerializeField] private IntSO healthSO;
 
     private Rigidbody2D rb2D;
     
@@ -30,15 +33,28 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("BOOM");
+            healthSO.DecreaseInt(1);
+                
+            ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
+
+            if (healthSO.Number == 0)
+            {
+                Debug.Log("GAME OVER");
+                //TODO: game end, this logic can be transfer to game manager
+            }
         }
-        else if (other.gameObject.CompareTag("Bullet"))
+        else if (other.CompareTag("Bullet"))
         {
-            Debug.Log("Destroy asteroid");
+            scoreSO.IncreaseInt(1);
+
+            ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
+            
+            GameObject bullet = other.gameObject;
+            ObjectPoolManager.Instance.ReturnToPool(bullet);
         }
-        else if (other.gameObject.CompareTag("Enemy"))
+        else if (other.CompareTag("Enemy"))
         {
             Debug.Log("this not be happen");
         }
