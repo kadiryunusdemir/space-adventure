@@ -6,6 +6,7 @@ namespace Utilities
         {
             Default = 0,
             Enemy = 1,
+            Bullet = 2,
         };
     }
 }

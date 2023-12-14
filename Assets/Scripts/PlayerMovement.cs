@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -50,5 +51,10 @@ public class PlayerMovement : MonoBehaviour
 
         transform.position = pos;
         
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.LogError(other.gameObject.layer);
     }
 }
