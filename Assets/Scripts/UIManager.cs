@@ -17,12 +17,10 @@ public class UIManager : MonoBehaviour
         scoreTextValue.text = scoreSO.Number.ToString();
         healthTextValue.text = healthSO.Number.ToString();
     }
-
     public void TestScore()
     {
         scoreSO.IncreaseInt(1);
     }
-    
     public void TestHealth()
     {
         healthSO.DecreaseInt(1);

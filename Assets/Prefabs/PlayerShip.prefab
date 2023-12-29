@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 158628391891314274}
   - component: {fileID: 4649261470858920299}
   - component: {fileID: 5318881319895430062}
+  - component: {fileID: 605696474672427835}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Player
@@ -158,3 +159,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1267616756236566264, guid: dcfba988feac6c144b3b49d5beb21996, type: 3}
   fireDelay: 0.25
+--- !u!114 &605696474672427835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305061126440985708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96736c7cd7a7f274190e11eb7a749cd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreSO: {fileID: 11400000, guid: 390ca1771c4c14723a13cec520683915, type: 2}
+  healthSO: {fileID: 11400000, guid: fe185270910c14f85ab9ee4e1e8da8ac, type: 2}
+  gameManager: {fileID: 0}
