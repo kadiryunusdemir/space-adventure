@@ -12,19 +12,15 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private UIManager uiManager;
     private Action<Enums.GameState> gameStateAction;
     private Enums.GameState gameState;
-    private Enums.LevelIndex levelIndex;
     private LevelData levelData;
     
     private void Start()
     {
-        levelIndex = levelManager.GetCurrentLevel();
-        //levelIndex = Enums.LevelIndex.Level1;
-        //ChangeGameState(Enums.GameState.MainMenu);
+        // ChangeGameState(Enums.GameState.MainMenu);
+        levelManager.IncreaseLevelIndex();
+        ChangeGameState(Enums.GameState.Starting);
     }
-    private void Update()
-    {   
-        ManageGame(gameState);
-    }
+
     public void TestGameLose()
     {
         ChangeGameState(Enums.GameState.Lose);
@@ -35,9 +31,9 @@ public class GameManager : Singleton<GameManager>
         ChangeGameState(Enums.GameState.Win);
     }
 
-    private void ManageGame(Enums.GameState currentGameState)
+    private async void ManageGame(Enums.GameState currentGameState)
     {
-        //Debug.Log("gamestate: "+ currentGameState);
+        Debug.Log("gamestate: "+ currentGameState);
         switch (currentGameState)
         {
             case Enums.GameState.Default:
@@ -46,34 +42,36 @@ public class GameManager : Singleton<GameManager>
                 levelManager.OpenMainMenu();
                 break;
             case Enums.GameState.Starting:
-                levelData = levelManager.GetLevelData(levelIndex);
+                levelData = levelManager.GetLevelData(levelManager.GetCurrentLevelIndex());
                 Debug.Log("test: " + levelData.Waves[0].WaveDensityPercentage);
                 ChangeGameState(Enums.GameState.Playing);
                 break;
             case Enums.GameState.Playing:
                 break;
             case Enums.GameState.Win:
-                Debug.Log("currenLevel: " + levelIndex);
-                if (levelIndex < Enums.LevelIndex.Level3)
+                // TODO: win panel
+                Debug.Log("currenLevel: " + levelManager.GetCurrentLevelIndex());
+                // TODO: burayı taşı
+                if (levelManager.GetCurrentLevelIndex() < Enums.LevelIndex.Level6)
                 {
-                    levelIndex++;
-                    levelManager.OpenLevelWithLevelIndex(levelIndex);
+                    levelManager.IncreaseLevelIndex();
                     gameState = Enums.GameState.Starting;
                 }
                 else
                 {
                     gameState = Enums.GameState.MainMenu;
                 }
-                
                 break;
             case Enums.GameState.Lose:
-                levelManager.OpenLevelWithLevelIndex(levelIndex);
+                // TODO: lose panel  
                 gameState = Enums.GameState.Starting;
                 break;
             case Enums.GameState.Paused:
+                // TODO: pause panel  
                 Time.timeScale = 0;
                 break;
             case Enums.GameState.GameEnded:
+                // TODO: game end panel  
                 // no more level
                 break;
             default:
