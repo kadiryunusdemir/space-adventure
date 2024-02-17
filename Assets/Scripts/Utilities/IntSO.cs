@@ -20,6 +20,12 @@ namespace Utilities
                 IntChangeEvent = new UnityEvent<int>();
             }
         }
+
+        public void ResetInt()
+        {
+            Number = startingNumber;
+            IntChangeEvent.Invoke(Number);
+        }
         
         public void SetInt(int amount)
         {
