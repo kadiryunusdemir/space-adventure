@@ -36,6 +36,8 @@ public class GameManager : Singleton<GameManager>
 
     private async void ManageGame(Enums.GameState currentGameState)
     {
+        var currentLevelIndex = levelManager.GetCurrentLevelIndex();
+        
         Debug.Log("gamestate: "+ currentGameState);
         switch (currentGameState)
         {
@@ -45,39 +47,38 @@ public class GameManager : Singleton<GameManager>
                 levelManager.OpenMainMenu();
                 break;
             case Enums.GameState.Starting:
-                levelData = levelManager.GetLevelData(levelManager.GetCurrentLevelIndex());
+                PrepareNextLevel();
+                levelData = levelManager.GetLevelData(currentLevelIndex);
                 await enemySpawner.CreateAsteroidShower(levelData);
                 ChangeGameState(Enums.GameState.Playing);
                 break;
             case Enums.GameState.Playing:
+                Time.timeScale = 1f;
                 break;
             case Enums.GameState.Win:
-                // TODO: win panel
-                Debug.Log("currenLevel: " + levelManager.GetCurrentLevelIndex());
-                PrepareNextLevel();
-                if (levelManager.GetCurrentLevelIndex() < Enums.LevelIndex.Level3)
+                Time.timeScale = 0;
+                // TODO: handle this
+                if (currentLevelIndex >= Enums.LevelIndex.Level3)
                 {
-                    levelManager.IncreaseLevelIndex();
-                    ChangeGameState(Enums.GameState.Starting);
+                    ChangeGameState(Enums.GameState.GameEnded);
+                    break;
                 }
-                else
-                {
-                    // TODO:
-                    ChangeGameState(Enums.GameState.MainMenu);
-                }
+                await uiManager.DisplayRelatedPanel(Enums.GameState.Win, currentLevelIndex);
+                levelManager.IncreaseLevelIndex();
                 break;
             case Enums.GameState.Lose:
-                // TODO: lose panel  
-                PrepareNextLevel();
-                gameState = Enums.GameState.Starting;
+                Time.timeScale = 0;
+                await uiManager.DisplayRelatedPanel(Enums.GameState.Lose, currentLevelIndex);
                 break;
             case Enums.GameState.Paused:
-                // TODO: pause panel  
                 Time.timeScale = 0;
+                await uiManager.DisplayRelatedPanel(Enums.GameState.Paused, currentLevelIndex);
                 break;
             case Enums.GameState.GameEnded:
                 // TODO: game end panel  
-                // no more level
+                Time.timeScale = 0;
+                Debug.Log("Last level is played");
+                ChangeGameState(Enums.GameState.MainMenu);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -102,6 +103,8 @@ public class GameManager : Singleton<GameManager>
 
     private void PrepareNextLevel()
     {
+        ObjectPoolManager.Instance.ReturnAllToPoolByType(Enums.ObjectPoolType.Enemy);
+        ObjectPoolManager.Instance.ReturnAllToPoolByType(Enums.ObjectPoolType.Bullet);
         scoreSO.ResetInt();
         healthSO.ResetInt();
     }
