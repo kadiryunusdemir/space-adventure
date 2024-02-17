@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f24fda22479aa45c8a9effc9f83e8623, type: 3}
-  m_Name: Level2
+  m_Name: Level3
   m_EditorClassIdentifier: 
   Waves:
-  - WaveDensityPercentage: 90
+  - WaveDensityPercentage: 100
