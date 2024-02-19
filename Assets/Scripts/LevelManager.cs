@@ -43,4 +43,9 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void OpenGame()
+    {
+        SceneManager.LoadScene("MainScene");
+    } 
 }

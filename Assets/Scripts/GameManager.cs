@@ -38,7 +38,7 @@ public class GameManager : Singleton<GameManager>
     {
         var currentLevelIndex = levelManager.GetCurrentLevelIndex();
         
-        Debug.Log("gamestate: "+ currentGameState);
+        // Debug.Log("gamestate: "+ currentGameState);
         switch (currentGameState)
         {
             case Enums.GameState.Default:

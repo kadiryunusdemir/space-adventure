@@ -9,7 +9,7 @@ namespace Utilities
     public class IntSO : ScriptableObject
     {
         [field: SerializeField] public int Number { get; private set; }
-        [SerializeField] private int startingNumber;
+        [SerializeField] public int startingNumber;
         [NonSerialized] public UnityEvent<int> IntChangeEvent;
 
         private void OnEnable()

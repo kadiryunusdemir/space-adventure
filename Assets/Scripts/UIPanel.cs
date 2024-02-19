@@ -17,11 +17,6 @@ public class UIPanel : MonoBehaviour
     [SerializeField] private Button cancelButton;
     [SerializeField] private Button actionButton;
 
-    private void Awake()
-    {
-        gameObject.SetActive(false); 
-    }
-
     public async UniTask DisplayPanel(string titleText, string subTitleText, UnityAction yesAction, UnityAction noAction)
     {
         title.text = titleText;

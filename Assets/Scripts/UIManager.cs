@@ -6,6 +6,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using Utilities;
 
 public class UIManager : MonoBehaviour
@@ -14,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private IntSO healthSO;
     [SerializeField] private TextMeshProUGUI scoreTextValue;
     [SerializeField] private TextMeshProUGUI healthTextValue;
+    [SerializeField] private Slider healthBar;
     [SerializeField] private GameObject mask;
     [SerializeField] private UIPanel uiPanel;
     // TODO: surveyPanel
@@ -28,6 +30,8 @@ public class UIManager : MonoBehaviour
     {
         scoreTextValue.text = scoreSO.Number.ToString();
         healthTextValue.text = healthSO.Number.ToString();
+        healthBar.maxValue = healthSO.startingNumber;
+        healthBar.value = healthSO.startingNumber;
     }
     public void TestScore()
     {
@@ -56,19 +60,19 @@ public class UIManager : MonoBehaviour
                 break;
             case Enums.GameState.Win:
                 await uiPanel.DisplayPanel($"You Win Level - {levelInt}" ,
-                    "TODO: survey",
+                    "Next Level?",
                     () => PanelAction(Enums.GameState.Starting),
                     () => PanelAction(Enums.GameState.MainMenu));
                 break;
             case Enums.GameState.Lose:
                 await uiPanel.DisplayPanel($"You Lose Level - {levelInt}",
-                    "TODO: survey",
+                    "Play Again?",
                     () => PanelAction(Enums.GameState.Starting),
                     () => PanelAction(Enums.GameState.MainMenu));
                 break;
             case Enums.GameState.Paused:
-                await uiPanel.DisplayPanel("Do you want to play more?",
-                    "TODO: survey",
+                await uiPanel.DisplayPanel($"You Paused Level - {levelInt}",
+                    "Do you want to play more?",
                     () => PanelAction(Enums.GameState.Playing),
                     () => PanelAction(Enums.GameState.MainMenu));
                 break;
@@ -92,6 +96,7 @@ public class UIManager : MonoBehaviour
     
     private void UpdateHealthUI(int health)
     {
+        healthBar.value = health;
         healthTextValue.text = healthSO.Number.ToString();
     }
 
