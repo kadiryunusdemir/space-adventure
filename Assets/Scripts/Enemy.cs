@@ -7,16 +7,17 @@ using Utilities;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private float speed = 3;
+    [SerializeField] private float speed;
     [SerializeField] private IntSO scoreSO;
     [SerializeField] private IntSO healthSO;
+    [SerializeField] private float enemyHealth;
+    private Transform playerTarget; // To store the player's transform
 
     private Rigidbody2D rb2D;
-    
     public void Init(Vector3 spawnPoint, Sprite sprite)
     {
-        spriteRenderer.sprite = sprite;
-        transform.position = spawnPoint;
+        this.spriteRenderer.sprite = sprite;
+        this.transform.position = spawnPoint;
         // transform.parent = spawnPoint;
         // transform.localScale = scale;
     }
@@ -25,7 +26,6 @@ public class Enemy : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
     }
-
     private void FixedUpdate()
     {
         rb2D.MovePosition(rb2D.position + Vector2.down * speed * Time.fixedDeltaTime);
@@ -36,8 +36,10 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             healthSO.DecreaseInt(1);
-                
-            ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
+            if(enemyHealth == 0)
+            {
+                ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
+            }    
 
             if (healthSO.Number == 0)
             {

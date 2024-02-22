@@ -16,7 +16,7 @@ public class PlayerShooting : MonoBehaviour
         cooldownTimer -= Time.deltaTime;
         if (Input.GetButton("Fire1") && cooldownTimer <= 0)
         {
-            // Instantiate(bulletPrefab, transform.position+ bulletOffset, transform.rotation);
+            //Instantiate(bulletPrefab, transform.position+ bulletOffset, transform.rotation);
             var enemy = ObjectPoolManager.Instance.Get(Enums.ObjectPoolType.Bullet);
             enemy.transform.position = transform.position + bulletOffset;
             
