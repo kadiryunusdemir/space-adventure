@@ -40,8 +40,9 @@ public class EnemySpawner : MonoBehaviour
                 var randomPoint = new Vector3(x, y, center.z);
 
                 // Check for overlaps near this position.
-                if(Physics2D.OverlapCircle(randomPoint, enemyRadius) == null) {
-                    await UniTask.Delay(100);
+                if(Physics2D.OverlapCircle(randomPoint, enemyRadius) == null) 
+                {
+                    // await UniTask.Delay(100);
                     var enemy = ObjectPoolManager.Instance.Get(Enums.ObjectPoolType.Enemy).GetComponent<Enemy>();
                     enemy.Init(randomPoint, enemySprites[i % 2]);
                     break;

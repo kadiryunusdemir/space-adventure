@@ -185,6 +185,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: brown-meteor
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 476
+        width: 98
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3537249ebbce4ca3b605bd7dc166bf6
+      internalID: 628703726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grey-meteor
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 309
+        width: 119
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d1832c94e6a34df2b5608174fd9286a
+      internalID: -1475094350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -198,7 +240,9 @@ TextureImporter:
     nameFileIdTable:
       Enemy: 1745908073
       PlayerShip: -1047320561
+      brown-meteor: 628703726
       bullet: 1524265480
+      grey-meteor: -1475094350
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

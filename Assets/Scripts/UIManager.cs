@@ -1,8 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 using Utilities;
 
 public class UIManager : MonoBehaviour
@@ -11,11 +15,23 @@ public class UIManager : MonoBehaviour
     [SerializeField] private IntSO healthSO;
     [SerializeField] private TextMeshProUGUI scoreTextValue;
     [SerializeField] private TextMeshProUGUI healthTextValue;
-    
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private GameObject mask;
+    [SerializeField] private UIPanel uiPanel;
+    // TODO: surveyPanel
+
+    private void Awake()
+    {
+        mask.gameObject.SetActive(false);
+        uiPanel.gameObject.SetActive(false);
+    }
+
     private void Start()
     {
         scoreTextValue.text = scoreSO.Number.ToString();
         healthTextValue.text = healthSO.Number.ToString();
+        healthBar.maxValue = healthSO.startingNumber;
+        healthBar.value = healthSO.startingNumber;
     }
     public void TestScore()
     {
@@ -26,6 +42,53 @@ public class UIManager : MonoBehaviour
         healthSO.DecreaseInt(1);
     }
 
+    public async UniTask DisplayRelatedPanel(Enums.GameState currentGameState, Enums.LevelIndex levelIndex)
+    {
+        var levelInt = (int)levelIndex;
+        
+        mask.gameObject.SetActive(true);
+        
+        switch (currentGameState)
+        {
+            case Enums.GameState.Default:
+                break;
+            case Enums.GameState.MainMenu:
+                break;
+            case Enums.GameState.Starting:
+                break;
+            case Enums.GameState.Playing:
+                break;
+            case Enums.GameState.Win:
+                await uiPanel.DisplayPanel($"You Win Level - {levelInt}" ,
+                    "Next Level?",
+                    () => PanelAction(Enums.GameState.Starting),
+                    () => PanelAction(Enums.GameState.MainMenu));
+                break;
+            case Enums.GameState.Lose:
+                await uiPanel.DisplayPanel($"You Lose Level - {levelInt}",
+                    "Play Again?",
+                    () => PanelAction(Enums.GameState.Starting),
+                    () => PanelAction(Enums.GameState.MainMenu));
+                break;
+            case Enums.GameState.Paused:
+                await uiPanel.DisplayPanel($"You Paused Level - {levelInt}",
+                    "Do you want to play more?",
+                    () => PanelAction(Enums.GameState.Playing),
+                    () => PanelAction(Enums.GameState.MainMenu));
+                break;
+            case Enums.GameState.GameEnded:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(currentGameState), currentGameState, null);
+        }
+    }
+
+    private void PanelAction(Enums.GameState nextGameState)
+    {
+        mask.SetActive(false);
+        GameManager.Instance.ChangeGameState(nextGameState);
+    }
+
     private void UpdateScoreUI(int score)
     {
         scoreTextValue.text = scoreSO.Number.ToString();
@@ -33,6 +96,7 @@ public class UIManager : MonoBehaviour
     
     private void UpdateHealthUI(int health)
     {
+        healthBar.value = health;
         healthTextValue.text = healthSO.Number.ToString();
     }
 
