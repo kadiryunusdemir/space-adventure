@@ -103,8 +103,7 @@ public class GameManager : Singleton<GameManager>
 
     private void PrepareNextLevel()
     {
-        ObjectPoolManager.Instance.ReturnAllToPoolByType(Enums.ObjectPoolType.Enemy);
-        ObjectPoolManager.Instance.ReturnAllToPoolByType(Enums.ObjectPoolType.Bullet);
+        ObjectPoolManager.Instance.ResetAll();
         scoreSO.ResetInt();
         healthSO.ResetInt();
     }

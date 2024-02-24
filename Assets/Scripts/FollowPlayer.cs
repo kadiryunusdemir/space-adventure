@@ -11,6 +11,14 @@ public class FollowPlayer : MonoBehaviour
     private Transform playerTransform;
     private bool isFollowingPlayer = true;
     private bool startFalling = false;
+    
+    public void Init(Vector3 spawnPoint)
+    {
+        this.transform.position = spawnPoint;
+        // transform.parent = spawnPoint;
+        // transform.localScale = scale;
+    }
+    
     void Start()
     {
         // Find the player ship by tag.

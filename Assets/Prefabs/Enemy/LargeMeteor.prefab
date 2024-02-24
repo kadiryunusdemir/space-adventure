@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5941685881506955383}
   - component: {fileID: 6683148807816899788}
   m_Layer: 0
-  m_Name: FastMeteor
+  m_Name: LargeMeteor
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3056b589a788e429bbf612a4c1b51be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 4
 --- !u!114 &6683148807816899788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1881983890911003377}
-  speed: 4
+  speed: 2
   scoreSO: {fileID: 11400000, guid: 390ca1771c4c14723a13cec520683915, type: 2}
   healthSO: {fileID: 11400000, guid: fe185270910c14f85ab9ee4e1e8da8ac, type: 2}
-  enemyHealth: 1
+  enemyHealth: 2

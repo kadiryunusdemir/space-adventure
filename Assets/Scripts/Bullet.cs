@@ -6,19 +6,10 @@ using Utilities;
 
 public class Bullet : MonoBehaviour
 {
-    public float timer = 5f;
     float maxSpeed = 8f;
 
     private void Update()
     {
-        // self destruction
-        timer -= Time.deltaTime;
-        if (timer <= 0)
-        {
-            ObjectPoolManager.Instance.ReturnToPool(gameObject);
-            // Destroy(gameObject);
-        }
-        
         // movement
         Vector3 pos = transform.position;
 

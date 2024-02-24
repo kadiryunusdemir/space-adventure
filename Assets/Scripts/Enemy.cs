@@ -6,18 +6,17 @@ using Utilities;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float speed;
     [SerializeField] private IntSO scoreSO;
     [SerializeField] private IntSO healthSO;
-    [SerializeField] private float enemyHealth;
+    [SerializeField] private int enemyHealth;
     private Transform playerTarget; // To store the player's transform
-
     private Rigidbody2D rb2D;
-    public void Init(Vector3 spawnPoint, Sprite sprite)
+    private int actualHealth;
+    public void Init(Vector3 spawnPoint)
     {
-        this.spriteRenderer.sprite = sprite;
         this.transform.position = spawnPoint;
+        actualHealth = enemyHealth;
         // transform.parent = spawnPoint;
         // transform.localScale = scale;
     }
@@ -35,30 +34,24 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            healthSO.DecreaseInt(1);
-            if(enemyHealth == 0)
-            {
-                ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
-            }    
-
-            if (healthSO.Number == 0)
-            {
-                Debug.Log("GAME OVER");
-                //TODO: game end, this logic can be transfer to game manager
-            }
+            healthSO.DecreaseInt(enemyHealth);
+            ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
         }
         else if (other.CompareTag("Bullet"))
         {
-            scoreSO.IncreaseInt(1);
-
-            ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
+            actualHealth -= 1;
+            if (actualHealth <= 0)
+            {
+                scoreSO.IncreaseInt(enemyHealth);
+                ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
+            }
             
             GameObject bullet = other.gameObject;
             ObjectPoolManager.Instance.ReturnToPool(bullet);
         }
         else if (other.CompareTag("Enemy"))
         {
-            Debug.Log("this not be happen");
+            Debug.Log("Enemies are collided. Prevent?");
         }
     }
 }

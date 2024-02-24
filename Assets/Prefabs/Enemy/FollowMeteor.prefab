@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2620552566642741877}
   - component: {fileID: 7491854737253891312}
   - component: {fileID: 5941685881506955383}
-  - component: {fileID: 6683148807816899788}
   - component: {fileID: -3978100707586496735}
   m_Layer: 0
   m_Name: FollowMeteor
@@ -163,24 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3056b589a788e429bbf612a4c1b51be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
---- !u!114 &6683148807816899788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5236196509392081673}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d71f5d8e27e234f3081993997f5503ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 1881983890911003377}
-  speed: 2
-  scoreSO: {fileID: 11400000, guid: 390ca1771c4c14723a13cec520683915, type: 2}
-  healthSO: {fileID: 11400000, guid: fe185270910c14f85ab9ee4e1e8da8ac, type: 2}
-  enemyHealth: 1
+  type: 5
 --- !u!114 &-3978100707586496735
 MonoBehaviour:
   m_ObjectHideFlags: 0
