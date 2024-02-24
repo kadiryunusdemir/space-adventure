@@ -19,6 +19,9 @@ namespace Utilities
             Default = 0,
             Enemy,
             Bullet,
+            FastEnemy,
+            LargeEnemy,
+            FollowEnemy,
         };
         
         public enum LevelIndex

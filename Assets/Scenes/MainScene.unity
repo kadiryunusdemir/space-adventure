@@ -154,8 +154,9 @@ Transform:
   m_Children:
   - {fileID: 1823162515}
   - {fileID: 1742834892}
-  - {fileID: 1218573550}
   - {fileID: 2131801834}
+  - {fileID: 806014785}
+  - {fileID: 1218573550}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &91643983
@@ -1272,9 +1273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa90f397db7d946ffaabb5d51aaef9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySprites:
-  - {fileID: 628703726, guid: 69bbdd040a4124f4c96acf5939856abd, type: 3}
-  - {fileID: -1475094350, guid: 69bbdd040a4124f4c96acf5939856abd, type: 3}
 --- !u!4 &806014785
 Transform:
   m_ObjectHideFlags: 0
@@ -1283,12 +1281,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806014783}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 15547820}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &810699992
 GameObject:
@@ -2189,6 +2187,15 @@ MonoBehaviour:
   - objectPoolType: 2
     originalPrefab: {fileID: 1267616756236566264, guid: dcfba988feac6c144b3b49d5beb21996, type: 3}
     initialSize: 20
+  - objectPoolType: 3
+    originalPrefab: {fileID: 5236196509392081673, guid: 6f597ed0729236a4490af8c73d267659, type: 3}
+    initialSize: 2
+  - objectPoolType: 4
+    originalPrefab: {fileID: 5236196509392081673, guid: 6024e84ab3e55884fbe2728d3bf54c8a, type: 3}
+    initialSize: 2
+  - objectPoolType: 5
+    originalPrefab: {fileID: 5236196509392081673, guid: 7d22122667ba56c468bc9665724aa006, type: 3}
+    initialSize: 2
 --- !u!4 &1218573550
 Transform:
   m_ObjectHideFlags: 0
@@ -3475,5 +3482,4 @@ SceneRoots:
   - {fileID: 937676377}
   - {fileID: 91643984}
   - {fileID: 15547820}
-  - {fileID: 806014785}
   - {fileID: 1349827056}

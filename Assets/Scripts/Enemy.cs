@@ -6,7 +6,6 @@ using Utilities;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float speed;
     [SerializeField] private IntSO scoreSO;
     [SerializeField] private IntSO healthSO;
@@ -14,9 +13,8 @@ public class Enemy : MonoBehaviour
     private Transform playerTarget; // To store the player's transform
 
     private Rigidbody2D rb2D;
-    public void Init(Vector3 spawnPoint, Sprite sprite)
+    public void Init(Vector3 spawnPoint)
     {
-        this.spriteRenderer.sprite = sprite;
         this.transform.position = spawnPoint;
         // transform.parent = spawnPoint;
         // transform.localScale = scale;

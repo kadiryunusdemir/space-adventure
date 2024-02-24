@@ -8,8 +8,6 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private List<Sprite> enemySprites;
-
 #if UNITY_EDITOR
     protected void OnDrawGizmos()
     {
@@ -27,6 +25,8 @@ public class EnemySpawner : MonoBehaviour
         int maxSpawnAttempts = 100; // Maximum number of attempts to find a non-overlapping position
         float enemyRadius = 4f;
 
+        int dummyEnemyCounterToShowDifferentEnemyTypes = 0;
+
         for (int i = 0; i < 10; i++)
         {
             int attempts = 0;
@@ -43,8 +43,29 @@ public class EnemySpawner : MonoBehaviour
                 if(Physics2D.OverlapCircle(randomPoint, enemyRadius) == null) 
                 {
                     // await UniTask.Delay(100);
-                    var enemy = ObjectPoolManager.Instance.Get(Enums.ObjectPoolType.Enemy).GetComponent<Enemy>();
-                    enemy.Init(randomPoint, enemySprites[i % 2]);
+                    if (dummyEnemyCounterToShowDifferentEnemyTypes < 2)
+                    {
+                        var followEnemy = ObjectPoolManager.Instance.Get(Enums.ObjectPoolType.FollowEnemy).GetComponent<FollowPlayer>();
+                        followEnemy.Init(randomPoint);
+                    }
+                    else if (dummyEnemyCounterToShowDifferentEnemyTypes < 4)
+                    {
+                        var fastEnemy = ObjectPoolManager.Instance.Get(Enums.ObjectPoolType.FastEnemy).GetComponent<Enemy>();
+                        fastEnemy.Init(randomPoint);
+                    }
+                    else if (dummyEnemyCounterToShowDifferentEnemyTypes < 6)
+                    {
+                        var largeEnemy = ObjectPoolManager.Instance.Get(Enums.ObjectPoolType.LargeEnemy).GetComponent<Enemy>();
+                        largeEnemy.Init(randomPoint);
+                    }
+                    else 
+                    {
+                        var enemy = ObjectPoolManager.Instance.Get(Enums.ObjectPoolType.Enemy).GetComponent<Enemy>();
+                        enemy.Init(randomPoint);
+                    }
+
+                    dummyEnemyCounterToShowDifferentEnemyTypes++;
+                    
                     break;
                 }
                 attempts++;
