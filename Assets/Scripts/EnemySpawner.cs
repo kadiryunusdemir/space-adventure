@@ -2,16 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using UnityEditor;
 using UnityEngine;
 using Utilities;
 using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] private float width;
+    [SerializeField] private float height;
+    
 #if UNITY_EDITOR
     protected void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, 5f);
+        Handles.Label(transform.position, "Enemy Spawner");
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(transform.position, new Vector3(width, height, 0));
     }
 #endif
     
@@ -21,9 +27,9 @@ public class EnemySpawner : MonoBehaviour
         //TODO: remove this dummy asteroid shower, create challenging shower important to game's playability  
         
         Vector3 center = this.transform.position;
-        float radius = 5f; 
+        float radius = width < height ? width : height; 
         int maxSpawnAttempts = 100; // Maximum number of attempts to find a non-overlapping position
-        float enemyRadius = 4f;
+        float enemyRadius = 2f;
 
         int dummyEnemyCounterToShowDifferentEnemyTypes = 0;
 

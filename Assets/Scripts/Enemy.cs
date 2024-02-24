@@ -38,12 +38,6 @@ public class Enemy : MonoBehaviour
             {
                 ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
             }    
-
-            if (healthSO.Number == 0)
-            {
-                Debug.Log("GAME OVER");
-                //TODO: game end, this logic can be transfer to game manager
-            }
         }
         else if (other.CompareTag("Bullet"))
         {
