@@ -9,13 +9,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private IntSO scoreSO;
     [SerializeField] private IntSO healthSO;
-    [SerializeField] private float enemyHealth;
+    [SerializeField] private int enemyHealth;
     private Transform playerTarget; // To store the player's transform
-
     private Rigidbody2D rb2D;
+    private int actualHealth;
     public void Init(Vector3 spawnPoint)
     {
         this.transform.position = spawnPoint;
+        actualHealth = enemyHealth;
         // transform.parent = spawnPoint;
         // transform.localScale = scale;
     }
@@ -33,24 +34,24 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            healthSO.DecreaseInt(1);
-            if(enemyHealth == 0)
-            {
-                ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
-            }    
+            healthSO.DecreaseInt(enemyHealth);
+            ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
         }
         else if (other.CompareTag("Bullet"))
         {
-            scoreSO.IncreaseInt(1);
-
-            ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
+            actualHealth -= 1;
+            if (actualHealth <= 0)
+            {
+                scoreSO.IncreaseInt(enemyHealth);
+                ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
+            }
             
             GameObject bullet = other.gameObject;
             ObjectPoolManager.Instance.ReturnToPool(bullet);
         }
         else if (other.CompareTag("Enemy"))
         {
-            Debug.Log("this not be happen");
+            Debug.Log("Enemies are collided. Prevent?");
         }
     }
 }
