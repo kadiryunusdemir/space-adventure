@@ -87,7 +87,7 @@ public class GameManager : Singleton<GameManager>
     
     private void CheckScore(int score)
     {
-        if (gameState == Enums.GameState.Playing && score > 3)
+        if (gameState == Enums.GameState.Playing && score > 5)
         {
             ChangeGameState(Enums.GameState.Win);
         }
@@ -115,6 +115,11 @@ public class GameManager : Singleton<GameManager>
             gameState = newGameState;
             gameStateAction.Invoke(gameState);
         }
+    }
+
+    public void PauseGame()
+    {
+        ChangeGameState(Enums.GameState.Paused);
     }
 
     private void OnApplicationQuit()

@@ -18,12 +18,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Slider healthBar;
     [SerializeField] private GameObject mask;
     [SerializeField] private UIPanel uiPanel;
-    // TODO: surveyPanel
+    [SerializeField] private SurveyPanel surveyPanel;
 
     private void Awake()
     {
         mask.gameObject.SetActive(false);
         uiPanel.gameObject.SetActive(false);
+        surveyPanel.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -59,20 +60,22 @@ public class UIManager : MonoBehaviour
             case Enums.GameState.Playing:
                 break;
             case Enums.GameState.Win:
-                await uiPanel.DisplayPanel($"You Win Level - {levelInt}" ,
-                    "Next Level?",
+                await DisplaySurveyPanel();
+                await uiPanel.DisplayPanel($"Bölüm {levelInt} geçildi!" ,
+                    "Bir sonraki bölüme geçmek ister misin?",
                     () => PanelAction(Enums.GameState.Starting),
                     () => PanelAction(Enums.GameState.MainMenu));
                 break;
             case Enums.GameState.Lose:
-                await uiPanel.DisplayPanel($"You Lose Level - {levelInt}",
-                    "Play Again?",
+                await DisplaySurveyPanel();
+                await uiPanel.DisplayPanel($"Bölüm {levelInt} kaybedildi",
+                    "Tekrar oynamak ister misin?",
                     () => PanelAction(Enums.GameState.Starting),
                     () => PanelAction(Enums.GameState.MainMenu));
                 break;
             case Enums.GameState.Paused:
-                await uiPanel.DisplayPanel($"You Paused Level - {levelInt}",
-                    "Do you want to play more?",
+                await uiPanel.DisplayPanel($"Bölüm {levelInt} durduruldu",
+                    "Devam etmek ister misin?",
                     () => PanelAction(Enums.GameState.Playing),
                     () => PanelAction(Enums.GameState.MainMenu));
                 break;
@@ -82,6 +85,13 @@ public class UIManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(currentGameState), currentGameState, null);
         }
     }
+
+    private async UniTask DisplaySurveyPanel()
+    {
+        await surveyPanel.DisplayPanel("Bölüm nasildi?", "Lütfen bir emojiyle oylar misin?");
+        await UniTask.WaitUntil(() => surveyPanel.isButtonClicked );
+        Debug.Log("Selected emoji: " + surveyPanel.selectedEmotionEnum);
+    } 
 
     private void PanelAction(Enums.GameState nextGameState)
     {

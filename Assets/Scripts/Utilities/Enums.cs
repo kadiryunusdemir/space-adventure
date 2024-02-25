@@ -34,5 +34,14 @@ namespace Utilities
             Level5,
             Level6,
         };
+        
+        public enum Emotion
+        {
+            Default = 0,
+            Normal,
+            Happy,
+            Angry,
+            Excited,
+        }
     }
 }
