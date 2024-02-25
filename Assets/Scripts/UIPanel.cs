@@ -40,5 +40,7 @@ public class UIPanel : MonoBehaviour
     {
         await transform.DOScale(0, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
         gameObject.SetActive(false);
+        cancelButton.onClick.RemoveAllListeners();
+        actionButton.onClick.RemoveAllListeners();
     }
 }
