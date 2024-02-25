@@ -175,8 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d71f5d8e27e234f3081993997f5503ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 1881983890911003377}
-  speed: 2
+  speed: 4
   scoreSO: {fileID: 11400000, guid: 390ca1771c4c14723a13cec520683915, type: 2}
   healthSO: {fileID: 11400000, guid: fe185270910c14f85ab9ee4e1e8da8ac, type: 2}
   enemyHealth: 1

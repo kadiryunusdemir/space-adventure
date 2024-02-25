@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Level2
   m_EditorClassIdentifier: 
   Waves:
-  - WaveDensityPercentage: 90
+  - WaveDensityPercentage: 80
+    enemyTypeActive: [0,1,0,0]
+    enemyTypeCount: [0,10,0,0]
