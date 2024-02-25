@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6430abfc9679e4f1c8bc96f9d5e80ed8, type: 3}
   m_Name: HealthSO
   m_EditorClassIdentifier: 
-  <Number>k__BackingField: 0
-  startingNumber: 10
+  <Number>k__BackingField: 99
+  startingNumber: 100

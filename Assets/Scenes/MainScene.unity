@@ -2316,13 +2316,13 @@ MonoBehaviour:
     initialSize: 20
   - objectPoolType: 3
     originalPrefab: {fileID: 5236196509392081673, guid: 6f597ed0729236a4490af8c73d267659, type: 3}
-    initialSize: 2
+    initialSize: 20
   - objectPoolType: 4
     originalPrefab: {fileID: 5236196509392081673, guid: 6024e84ab3e55884fbe2728d3bf54c8a, type: 3}
-    initialSize: 2
+    initialSize: 20
   - objectPoolType: 5
     originalPrefab: {fileID: 5236196509392081673, guid: 7d22122667ba56c468bc9665724aa006, type: 3}
-    initialSize: 2
+    initialSize: 20
 --- !u!4 &1218573550
 Transform:
   m_ObjectHideFlags: 0

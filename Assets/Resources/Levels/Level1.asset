@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waves:
   - WaveDensityPercentage: 80
+    enemyTypeActive: [1,0,0,0]
+    enemyTypeCount: [10,0,0,0]
+  - WaveDensityPercentage: 80
+    enemyTypeActive: [0,0,1,0]
+    enemyTypeCount: [0,0,10,0]
