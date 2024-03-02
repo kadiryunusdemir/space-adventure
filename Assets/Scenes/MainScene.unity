@@ -191,6 +191,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2132626059}
   - {fileID: 1559467373}
   - {fileID: 1343440328}
   - {fileID: 669043944}
@@ -3829,6 +3830,9 @@ MonoBehaviour:
   - objectPoolType: 5
     originalPrefab: {fileID: 5236196509392081673, guid: 7d22122667ba56c468bc9665724aa006, type: 3}
     initialSize: 20
+  - objectPoolType: 6
+    originalPrefab: {fileID: 7460403840652036108, guid: 13a31a920329a4ed7b0f91e134275e7e, type: 3}
+    initialSize: 20
 --- !u!4 &1218573550
 Transform:
   m_ObjectHideFlags: 0
@@ -5860,7 +5864,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPersistant: 1
-  canvas: {fileID: 91643983}
   scoreSO: {fileID: 11400000, guid: 390ca1771c4c14723a13cec520683915, type: 2}
   healthSO: {fileID: 11400000, guid: fe185270910c14f85ab9ee4e1e8da8ac, type: 2}
   scoreTextValue: {fileID: 481138690}
@@ -5869,6 +5872,7 @@ MonoBehaviour:
   mask: {fileID: 1543520189}
   uiPanel: {fileID: 852371923}
   surveyPanel: {fileID: 810556391}
+  explosionTextParent: {fileID: 2132626058}
 --- !u!4 &2131801834
 Transform:
   m_ObjectHideFlags: 0
@@ -5884,6 +5888,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 15547820}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2132626058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2132626059}
+  m_Layer: 5
+  m_Name: Explosion Texts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2132626059
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132626058}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 91643984}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

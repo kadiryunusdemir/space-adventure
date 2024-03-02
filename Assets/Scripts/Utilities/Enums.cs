@@ -22,6 +22,7 @@ namespace Utilities
             FastEnemy,
             LargeEnemy,
             FollowEnemy,
+            ExplosionText
         };
         
         public enum LevelIndex
