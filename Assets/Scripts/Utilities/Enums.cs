@@ -43,5 +43,17 @@ namespace Utilities
             Angry,
             Excited,
         }
+        
+        public enum Sound
+        {
+            Default = 0,
+            LaserFire,
+            PlayerHit,
+            PlayerDie,
+            EnemyHit,
+            EnemyDie,
+            Win,
+            Lose
+        }
     }
 }

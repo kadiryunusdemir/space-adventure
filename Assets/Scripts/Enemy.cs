@@ -34,14 +34,21 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            SoundManager.Instance.PlaySound(Enums.Sound.EnemyDie, transform.position);
+
             healthSO.DecreaseInt(enemyHealth);
             ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
         }
         else if (other.CompareTag("Bullet"))
         {
+            SoundManager.Instance.PlaySound(Enums.Sound.EnemyHit, transform.position);
+
             actualHealth -= 1;
             if (actualHealth <= 0)
             {
+                SoundManager.Instance.PlaySound(Enums.Sound.EnemyDie, transform.position);
+
+                UIManager.Instance.DisplayMessage(transform.position, actualHealth.ToString());
                 scoreSO.IncreaseInt(enemyHealth);
                 ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
             }

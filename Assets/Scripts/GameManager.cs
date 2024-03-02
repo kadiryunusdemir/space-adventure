@@ -54,6 +54,7 @@ public class GameManager : Singleton<GameManager>
                 break;
             case Enums.GameState.Playing:
                 Time.timeScale = 1f;
+                SoundManager.Instance.StartGameSound();
                 break;
             case Enums.GameState.Win:
                 Time.timeScale = 0;
@@ -63,20 +64,26 @@ public class GameManager : Singleton<GameManager>
                     ChangeGameState(Enums.GameState.GameEnded);
                     break;
                 }
+                SoundManager.Instance.PlaySound(Enums.Sound.Win);
+                SoundManager.Instance.StopGameSound();
                 await uiManager.DisplayRelatedPanel(Enums.GameState.Win, currentLevelIndex);
                 levelManager.IncreaseLevelIndex();
                 break;
             case Enums.GameState.Lose:
                 Time.timeScale = 0;
+                SoundManager.Instance.PlaySound(Enums.Sound.Lose);
+                SoundManager.Instance.StopGameSound();
                 await uiManager.DisplayRelatedPanel(Enums.GameState.Lose, currentLevelIndex);
                 break;
             case Enums.GameState.Paused:
                 Time.timeScale = 0;
+                SoundManager.Instance.StopGameSound();
                 await uiManager.DisplayRelatedPanel(Enums.GameState.Paused, currentLevelIndex);
                 break;
             case Enums.GameState.GameEnded:
                 // TODO: game end panel  
                 Time.timeScale = 0;
+                SoundManager.Instance.StopGameSound();
                 Debug.Log("Last level is played");
                 ChangeGameState(Enums.GameState.MainMenu);
                 break;
@@ -95,8 +102,12 @@ public class GameManager : Singleton<GameManager>
     
     private void CheckHealth(int health)
     {
+        SoundManager.Instance.PlaySound(Enums.Sound.PlayerHit, transform.position);
+
         if (gameState == Enums.GameState.Playing && health <= 0)
         {
+            SoundManager.Instance.PlaySound(Enums.Sound.PlayerDie, transform.position);
+
             ChangeGameState(Enums.GameState.Lose);
         }
     }

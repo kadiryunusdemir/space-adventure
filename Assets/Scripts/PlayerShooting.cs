@@ -21,6 +21,7 @@ public class PlayerShooting : MonoBehaviour
             enemy.transform.position = transform.position + bulletOffset;
             
             cooldownTimer = fireDelay;
+            SoundManager.Instance.PlaySound(Enums.Sound.LaserFire, transform.position);
         }
     }
 }
