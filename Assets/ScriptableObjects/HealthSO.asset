@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: HealthSO
   m_EditorClassIdentifier: 
   <Number>k__BackingField: 0
-  startingNumber: 10
+  startingNumber: 7
