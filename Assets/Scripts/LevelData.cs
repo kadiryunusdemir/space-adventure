@@ -13,8 +13,10 @@ public class LevelData : ScriptableObject
 public struct Data
 {
     public int WaveDensityPercentage;
-    public int[] enemyTypeActive; //0 for normal,1 for large, 2 for fast, 3 for follow meteor
-    public int[] enemyTypeCount; //0 for normal,1 for large, 2 for fast, 3 for follow meteor
+    public int enemyCount;
+    public int[] delayAmount;
+    public int[] enemyType;
+    public int[] enemySpawnPoint;
     // public int WaveEnemyCount;
     [NonSerialized] public int DestroyedEnemyCount;
 }

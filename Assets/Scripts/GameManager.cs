@@ -49,11 +49,11 @@ public class GameManager : Singleton<GameManager>
             case Enums.GameState.Starting:
                 PrepareNextLevel();
                 levelData = levelManager.GetLevelData(currentLevelIndex);
-                await enemySpawner.CreateAsteroidShower(levelData);
                 ChangeGameState(Enums.GameState.Playing);
                 break;
             case Enums.GameState.Playing:
                 Time.timeScale = 1f;
+                await enemySpawner.CreateAsteroidShower2(levelData);
                 break;
             case Enums.GameState.Win:
                 Time.timeScale = 0;
@@ -87,7 +87,7 @@ public class GameManager : Singleton<GameManager>
     
     private void CheckScore(int score)
     {
-        if (gameState == Enums.GameState.Playing && score > 5)
+        if (gameState == Enums.GameState.Playing && score > 70)
         {
             ChangeGameState(Enums.GameState.Win);
         }
