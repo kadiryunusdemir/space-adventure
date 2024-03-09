@@ -11,12 +11,15 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private EnemySpawner enemySpawner;
+    [SerializeField] private IntSO scoreSO;
+    [SerializeField] private IntSO healthSO;
+    [SerializeField] private IntSO meteorSO;
+    
     private Action<Enums.GameState> gameStateAction;
     private Enums.GameState gameState;
     private LevelData levelData;
-    [SerializeField] private IntSO scoreSO;
-    [SerializeField] private IntSO healthSO;
-    
+    private int totalMeteorCount;
+
     private void Start()
     {
         // ChangeGameState(Enums.GameState.MainMenu);
@@ -49,6 +52,7 @@ public class GameManager : Singleton<GameManager>
             case Enums.GameState.Starting:
                 PrepareNextLevel();
                 levelData = levelManager.GetLevelData(currentLevelIndex);
+                totalMeteorCount = GetTotalMeteorCount();
                 ChangeGameState(Enums.GameState.Playing);
                 break;
             case Enums.GameState.Playing:
@@ -118,7 +122,26 @@ public class GameManager : Singleton<GameManager>
         scoreSO.ResetInt();
         healthSO.ResetInt();
     }
+    
+    private int GetTotalMeteorCount()
+    {
+        int total = 0;
+        foreach (var item in levelData.Waves)
+        {
+            total += item.enemyCount;
+        }
 
+        return total;
+    }
+
+    private void ManageMeteorDestroy(int count)
+    {
+        if (count == totalMeteorCount)
+        {
+            ChangeGameState(Enums.GameState.Win);
+        }
+    }
+ 
     public void ChangeGameState(Enums.GameState newGameState)
     {
         if (gameState != newGameState)
@@ -144,14 +167,16 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         gameStateAction += ManageGame;
-        scoreSO.IntChangeEvent.AddListener(CheckScore);
+        meteorSO.IntChangeEvent.AddListener(ManageMeteorDestroy);
+        // scoreSO.IntChangeEvent.AddListener(CheckScore);
         healthSO.IntChangeEvent.AddListener(CheckHealth);
     }
 
     private void OnDisable()
     {
         gameStateAction -= ManageGame;
-        scoreSO.IntChangeEvent.RemoveListener(CheckScore);
+        meteorSO.IntChangeEvent.RemoveListener(ManageMeteorDestroy);
+        // scoreSO.IntChangeEvent.RemoveListener(CheckScore);
         healthSO.IntChangeEvent.RemoveListener(CheckHealth);
     }
 }

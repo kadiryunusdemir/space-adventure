@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private IntSO scoreSO;
     [SerializeField] private IntSO healthSO;
+    [SerializeField] private IntSO meteorSO;
     [SerializeField] private int enemyHealth;
     private Transform playerTarget; // To store the player's transform
     private Rigidbody2D rb2D;
@@ -50,6 +51,7 @@ public class Enemy : MonoBehaviour
 
                 // UIManager.Instance.DisplayMessage(transform.position, enemyHealth.ToString());
                 scoreSO.IncreaseInt(enemyHealth);
+                meteorSO.IncreaseInt(1);
                 ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
             }
             
