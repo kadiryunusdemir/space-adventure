@@ -49,11 +49,11 @@ public class GameManager : Singleton<GameManager>
             case Enums.GameState.Starting:
                 PrepareNextLevel();
                 levelData = levelManager.GetLevelData(currentLevelIndex);
-                await enemySpawner.CreateAsteroidShower(levelData);
                 ChangeGameState(Enums.GameState.Playing);
                 break;
             case Enums.GameState.Playing:
                 Time.timeScale = 1f;
+                await enemySpawner.CreateAsteroidShower2(levelData);
                 SoundManager.Instance.StartGameSound();
                 break;
             case Enums.GameState.Win:

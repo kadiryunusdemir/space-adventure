@@ -2038,6 +2038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 20
   height: 5
+  mainCamera: {fileID: 1469938034}
 --- !u!4 &806014785
 Transform:
   m_ObjectHideFlags: 0
