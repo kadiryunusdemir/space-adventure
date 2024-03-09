@@ -87,7 +87,7 @@ public class GameManager : Singleton<GameManager>
     
     private void CheckScore(int score)
     {
-        if (gameState == Enums.GameState.Playing && score > 15)
+        if (gameState == Enums.GameState.Playing && score > 70)
         {
             ChangeGameState(Enums.GameState.Win);
         }
