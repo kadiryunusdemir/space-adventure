@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour
             SoundManager.Instance.PlaySound(Enums.Sound.EnemyDie, transform.position);
 
             healthSO.DecreaseInt(enemyHealth);
+            meteorSO.IncreaseInt(1);
+
             ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
         }
         else if (other.CompareTag("Bullet"))
@@ -52,6 +54,7 @@ public class Enemy : MonoBehaviour
                 // UIManager.Instance.DisplayMessage(transform.position, enemyHealth.ToString());
                 scoreSO.IncreaseInt(enemyHealth);
                 meteorSO.IncreaseInt(1);
+                
                 ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
             }
             
