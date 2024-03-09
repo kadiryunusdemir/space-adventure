@@ -42,7 +42,7 @@ namespace Utilities
             Normal,
             Happy,
             Angry,
-            Excited,
+            Suprised,
         }
         
         public enum Sound
