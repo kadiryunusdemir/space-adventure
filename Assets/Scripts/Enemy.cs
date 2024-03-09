@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
             {
                 SoundManager.Instance.PlaySound(Enums.Sound.EnemyDie, transform.position);
 
-                UIManager.Instance.DisplayMessage(transform.position, enemyHealth.ToString());
+                // UIManager.Instance.DisplayMessage(transform.position, enemyHealth.ToString());
                 scoreSO.IncreaseInt(enemyHealth);
                 ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
             }
