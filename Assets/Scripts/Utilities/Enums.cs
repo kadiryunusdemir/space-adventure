@@ -22,6 +22,7 @@ namespace Utilities
             FastEnemy,
             LargeEnemy,
             FollowEnemy,
+            ExplosionText
         };
         
         public enum LevelIndex
@@ -41,7 +42,19 @@ namespace Utilities
             Normal,
             Happy,
             Angry,
-            Excited,
+            Suprised,
+        }
+        
+        public enum Sound
+        {
+            Default = 0,
+            LaserFire,
+            PlayerHit,
+            PlayerDie,
+            EnemyHit,
+            EnemyDie,
+            Win,
+            Lose
         }
     }
 }

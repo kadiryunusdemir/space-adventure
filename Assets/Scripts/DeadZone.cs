@@ -9,6 +9,7 @@ using Utilities;
 public class EnemyDeadZone : MonoBehaviour
 {
     [SerializeField] private IntSO healthSO;
+    [SerializeField] private IntSO meteorSO;
     [SerializeField] private BoxCollider2D boxCollider2D;
 
 #if UNITY_EDITOR
@@ -27,6 +28,7 @@ public class EnemyDeadZone : MonoBehaviour
             var enemy = other.gameObject.GetComponent<Enemy>();
             // TODO: decrease the health by the enemy health
             healthSO.DecreaseInt(1);
+            meteorSO.IncreaseInt(1);
         }
 
         ObjectPoolManager.Instance.ReturnToPool(other.gameObject);

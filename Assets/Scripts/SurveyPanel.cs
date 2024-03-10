@@ -16,7 +16,7 @@ public class SurveyPanel : MonoBehaviour
     [SerializeField] private Button normalEmotionButton;
     [SerializeField] private Button happyEmotionButton;
     [SerializeField] private Button angryEmotionButton;
-    [SerializeField] private Button excitedEmotionButton;
+    [SerializeField] private Button surprisedEmotionButton;
 
     public bool isButtonClicked { get; private set; } = false;
     public Enums.Emotion selectedEmotionEnum { get; private set; } = Enums.Emotion.Default;
@@ -38,9 +38,9 @@ public class SurveyPanel : MonoBehaviour
             SelectEmotion(Enums.Emotion.Angry);
             await DeactivatePanel();
         });
-        excitedEmotionButton.onClick.AddListener(async () => 
+        surprisedEmotionButton.onClick.AddListener(async () => 
         {
-            SelectEmotion(Enums.Emotion.Excited);
+            SelectEmotion(Enums.Emotion.Suprised);
             await DeactivatePanel();
         });
     }
