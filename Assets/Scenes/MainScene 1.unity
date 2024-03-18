@@ -9228,13 +9228,13 @@ MonoBehaviour:
   - sound: 1
     audioClip: {fileID: 8300000, guid: b5ebe20d5642d4d4d9756573c870a747, type: 3}
   - sound: 2
-    audioClip: {fileID: 8300000, guid: 067a0e4fa69b44d1383783519e78e467, type: 3}
+    audioClip: {fileID: 8300000, guid: bf7712c4656c44e73867a164bf3e19d1, type: 3}
   - sound: 3
     audioClip: {fileID: 8300000, guid: 3f77a3450f9914206af71f4adfb5f791, type: 3}
   - sound: 4
-    audioClip: {fileID: 8300000, guid: 22382465507cf40cda1257b789e8adab, type: 3}
+    audioClip: {fileID: 8300000, guid: e7d5c520d36094d068ea8b0e8bd151e9, type: 3}
   - sound: 5
-    audioClip: {fileID: 8300000, guid: 22382465507cf40cda1257b789e8adab, type: 3}
+    audioClip: {fileID: 8300000, guid: e7d5c520d36094d068ea8b0e8bd151e9, type: 3}
   - sound: 6
     audioClip: {fileID: 8300000, guid: 5a26d16f68d824326b5b3fd0c5d17ad9, type: 3}
   - sound: 7
@@ -10131,6 +10131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPersistant: 1
+  camera: {fileID: 1469938034}
   levelManager: {fileID: 1742834893}
   uiManager: {fileID: 2131801833}
   enemySpawner: {fileID: 806014784}
