@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utilities;
@@ -8,6 +9,7 @@ using Object = UnityEngine.Object;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] private Camera camera;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private EnemySpawner enemySpawner;
@@ -113,6 +115,9 @@ public class GameManager : Singleton<GameManager>
     
     private void CheckHealth(int health)
     {
+        camera.transform.DOShakePosition(0.4f, Vector3.one / 10);
+        camera.transform.DOShakeRotation(0.4f, Vector3.one / 10);
+            
         SoundManager.Instance.PlaySound(Enums.Sound.PlayerHit, transform.position);
 
         if (gameState == Enums.GameState.Playing && health <= 0)

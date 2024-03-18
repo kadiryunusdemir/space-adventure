@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Utilities;
 
@@ -11,13 +12,19 @@ public class Enemy : MonoBehaviour
     [SerializeField] private IntSO healthSO;
     [SerializeField] private IntSO meteorSO;
     [SerializeField] private int enemyHealth;
+    [SerializeField] private ParticleSystem explosionParticle;
     private Transform playerTarget; // To store the player's transform
     private Rigidbody2D rb2D;
     private int actualHealth;
+    private Vector3 shakeStr;
+    private float shakeTime;
+    
     public void Init(Vector3 spawnPoint)
     {
         this.transform.position = spawnPoint;
         actualHealth = enemyHealth;
+        shakeStr = Vector3.one / 10;
+        shakeTime = 0.2f;
         // transform.parent = spawnPoint;
         // transform.localScale = scale;
     }
@@ -33,37 +40,50 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Enemy"))
         {
-            SoundManager.Instance.PlaySound(Enums.Sound.EnemyDie, transform.position);
-
-            healthSO.DecreaseInt(enemyHealth);
-            meteorSO.IncreaseInt(1);
-
-            ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
+            Debug.Log("Enemies are collided. Prevent?");
+            return;
         }
-        else if (other.CompareTag("Bullet"))
+
+        if (other.CompareTag("Bullet"))
         {
             SoundManager.Instance.PlaySound(Enums.Sound.EnemyHit, transform.position);
 
             actualHealth -= 1;
-            if (actualHealth <= 0)
-            {
-                SoundManager.Instance.PlaySound(Enums.Sound.EnemyDie, transform.position);
-
-                // UIManager.Instance.DisplayMessage(transform.position, enemyHealth.ToString());
-                scoreSO.IncreaseInt(enemyHealth);
-                meteorSO.IncreaseInt(1);
-                
-                ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
-            }
+            
+            transform.DOComplete();
+            transform.DOShakeRotation(shakeTime, shakeStr);
+            transform.DOShakePosition(shakeTime, shakeStr);
             
             GameObject bullet = other.gameObject;
             ObjectPoolManager.Instance.ReturnToPool(bullet);
         }
-        else if (other.CompareTag("Enemy"))
+        
+        if (other.CompareTag("Player") || actualHealth <= 0)
         {
-            Debug.Log("Enemies are collided. Prevent?");
+            if (other.CompareTag("Player"))
+            {
+                other.transform.DOComplete();
+                other.transform.DOShakeRotation(shakeTime, shakeStr);
+                other.transform.DOShakePosition(shakeTime, shakeStr);
+                healthSO.DecreaseInt(enemyHealth);
+                scoreSO.DecreaseInt(enemyHealth);
+            }
+            
+            explosionParticle.Play();
+            SoundManager.Instance.PlaySound(Enums.Sound.EnemyDie, transform.position);
+
+            // UIManager.Instance.DisplayMessage(transform.position, enemyHealth.ToString());
+            scoreSO.IncreaseInt(enemyHealth);
+            meteorSO.IncreaseInt(1);
+
+            transform.DOComplete();
+            transform.DOShakeRotation(shakeTime, shakeStr);
+            transform.DOShakePosition(shakeTime, shakeStr).OnComplete(() =>
+            {
+                ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
+            });
         }
     }
 }

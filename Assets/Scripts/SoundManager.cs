@@ -37,6 +37,7 @@ public class SoundManager : Singleton<SoundManager>
           audioSource.transform.position = position;
           audioSource.clip = sound.audioClip;
           audioSource.Play();
+          // UniTask.WaitWhile((() => audioSource.isPlaying));
      }
 
      public void StopGameSound()
