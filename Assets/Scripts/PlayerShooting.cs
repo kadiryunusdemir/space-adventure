@@ -6,7 +6,7 @@ using Utilities;
 public class PlayerShooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public float fireDelay = 2f;
+    public float fireDelay;
     float cooldownTimer = 0;
     Vector3 bulletOffset = new Vector3(0, 0.5f, 0);
 
@@ -20,7 +20,7 @@ public class PlayerShooting : MonoBehaviour
             var enemy = ObjectPoolManager.Instance.Get(Enums.ObjectPoolType.Bullet);
             enemy.transform.position = transform.position + bulletOffset;
             
-            cooldownTimer = fireDelay;
+            cooldownTimer = fireDelay / 1000f; 
             SoundManager.Instance.PlaySound(Enums.Sound.LaserFire, transform.position);
         }
     }

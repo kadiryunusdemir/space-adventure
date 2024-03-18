@@ -33,6 +33,7 @@ public class EnemySpawner : MonoBehaviour
         // Start the spawning process
         foreach (var wave in levelData.Waves)
         {
+
             int[] spawnDelay = wave.delayAmount;
             int[] enemyType = wave.enemyType;
             int[] enemySpawnPoint = wave.enemySpawnPoint;

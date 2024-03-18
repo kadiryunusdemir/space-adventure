@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 2620552566642741877}
   - component: {fileID: 7491854737253891312}
   - component: {fileID: 5941685881506955383}
-  - component: {fileID: -3978100707586496735}
+  - component: {fileID: -6365624690991987260}
+  - component: {fileID: 3281785958795745495}
   m_Layer: 0
-  m_Name: FollowMeteor
+  m_Name: FollowMeteorDamage
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 628703726, guid: 69bbdd040a4124f4c96acf5939856abd, type: 3}
+  m_Sprite: {fileID: 1742762875, guid: 69bbdd040a4124f4c96acf5939856abd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -163,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 5
---- !u!114 &-3978100707586496735
+--- !u!114 &-6365624690991987260
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,7 +173,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 5236196509392081673}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff8282fd07eced140a3811503bd9179e, type: 3}
+  m_Script: {fileID: 11500000, guid: f61b0eda4002f274e9f83c307492aa09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 4
+--- !u!114 &3281785958795745495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5236196509392081673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71f5d8e27e234f3081993997f5503ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  scoreSO: {fileID: 11400000, guid: 390ca1771c4c14723a13cec520683915, type: 2}
+  healthSO: {fileID: 11400000, guid: fe185270910c14f85ab9ee4e1e8da8ac, type: 2}
+  meteorSO: {fileID: 11400000, guid: a0a43b732aa524a3aa6ae1a98a254d43, type: 2}
+  enemyHealth: 1000

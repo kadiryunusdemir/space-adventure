@@ -13,6 +13,7 @@ public class LevelData : ScriptableObject
 public struct Data
 {
     public int WaveDensityPercentage;
+    public int fireDelay;
     public int enemyCount;
     public int[] delayAmount;
     public int[] enemyType;
