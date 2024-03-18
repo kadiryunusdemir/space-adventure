@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f24fda22479aa45c8a9effc9f83e8623, type: 3}
-  m_Name: Level2
+  m_Name: Level5
   m_EditorClassIdentifier: 
   Waves:
   - WaveDensityPercentage: 80
-    fireDelay: 800
-    enemyCount: 21
-    enemyType: [0, 0, 1, 0, 2, 0, 1, 0, 2, 1, 0, 2, 0, 1, 0, 2, 0, 1, 0, 2, 0]
-    enemySpawnPoint: [5, 4, 6, 7, 8, 9, 10, 9, 11, 12, 11, 10, 9, 8, 7, 6, 5, 4, 6, 7, 8]
-    delayAmount: [1200, 1300, 1300, 1200, 1100, 1200, 1100, 1200, 1100, 1200, 1300, 1300, 1200, 1300, 1400, 1400, 1300, 1400, 1300, 1200, 1100]
+    fireDelay: 1000
+    enemyCount: 1
+    enemySpawnPoint: [9]
+    enemyType: [3]
+    delayAmount: [1200]

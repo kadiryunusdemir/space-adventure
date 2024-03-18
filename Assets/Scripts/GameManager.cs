@@ -14,7 +14,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private IntSO scoreSO;
     [SerializeField] private IntSO healthSO;
     [SerializeField] private IntSO meteorSO;
-    
+
+    private PlayerShooting playerShooting;
     private Action<Enums.GameState> gameStateAction;
     private Enums.GameState gameState;
     private LevelData levelData;
@@ -22,6 +23,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        playerShooting = FindObjectOfType<PlayerShooting>();
         // ChangeGameState(Enums.GameState.MainMenu);
         levelManager.IncreaseLevelIndex();
         ChangeGameState(Enums.GameState.Starting);
@@ -40,7 +42,8 @@ public class GameManager : Singleton<GameManager>
     private async void ManageGame(Enums.GameState currentGameState)
     {
         var currentLevelIndex = levelManager.GetCurrentLevelIndex();
-        
+
+    
         // Debug.Log("gamestate: "+ currentGameState);
         switch (currentGameState)
         {
@@ -50,20 +53,24 @@ public class GameManager : Singleton<GameManager>
                 levelManager.OpenMainMenu();
                 break;
             case Enums.GameState.Starting:
+                Debug.Log("Level Starting" + levelManager.GetCurrentLevelIndex());
                 PrepareNextLevel();
                 levelData = levelManager.GetLevelData(currentLevelIndex);
                 totalMeteorCount = GetTotalMeteorCount();
                 ChangeGameState(Enums.GameState.Playing);
                 break;
             case Enums.GameState.Playing:
+                Debug.Log("Level Playing" + levelManager.GetCurrentLevelIndex());
                 Time.timeScale = 1f;
+                playerShooting.fireDelay = levelData.Waves[0].fireDelay;
                 await enemySpawner.CreateAsteroidShower2(levelData);
                 SoundManager.Instance.StartGameSound();
                 break;
             case Enums.GameState.Win:
+                Debug.Log("Level Win" + levelManager.GetCurrentLevelIndex());
                 Time.timeScale = 0;
                 // TODO: handle this
-                if (currentLevelIndex >= Enums.LevelIndex.Level3)
+                if (currentLevelIndex >= Enums.LevelIndex.Level7)
                 {
                     ChangeGameState(Enums.GameState.GameEnded);
                     break;
@@ -96,13 +103,13 @@ public class GameManager : Singleton<GameManager>
         }
     }
     
-    private void CheckScore(int score)
-    {
-        if (gameState == Enums.GameState.Playing && score > 5)
-        {
-            ChangeGameState(Enums.GameState.Win);
-        }
-    }
+    //private void CheckScore(int score)
+    //{
+    //    if (gameState == Enums.GameState.Playing && score > 5)
+    //    {
+    //        ChangeGameState(Enums.GameState.Win);
+    //    }
+    //}
     
     private void CheckHealth(int health)
     {
@@ -121,25 +128,27 @@ public class GameManager : Singleton<GameManager>
         ObjectPoolManager.Instance.ResetAll();
         scoreSO.ResetInt();
         healthSO.ResetInt();
+        meteorSO.ResetInt();
     }
     
     private int GetTotalMeteorCount()
     {
+
         int total = 0;
         foreach (var item in levelData.Waves)
         {
             total += item.enemyCount;
         }
-
         return total;
     }
 
     private void ManageMeteorDestroy(int count)
     {
-        if (count == totalMeteorCount)
+        if (count == totalMeteorCount && totalMeteorCount != 0)
         {
             ChangeGameState(Enums.GameState.Win);
         }
+
     }
  
     public void ChangeGameState(Enums.GameState newGameState)
