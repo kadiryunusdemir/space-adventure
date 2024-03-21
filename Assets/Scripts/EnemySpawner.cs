@@ -42,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
 
             while(createdEnemyCount < enemyCount)
             {
-                
+                //Debug.Log("Creating enemy: " + createdEnemyCount + "for enemy count: " + enemyCount);
                 int randomSpawnPointUnit = enemySpawnPoint[createdEnemyCount];
 
                 Vector3 spawnPoint = new Vector3(leftEdge.x + (randomSpawnPointUnit * spawnPointInterval), transform.position.y, 0);
@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
 
             }
 
-
+            Debug.Log("Created Meteor Count: " + createdEnemyCount + " Ending spawner");
         }
     }
     private void SpawnAsteroid(Vector3 position, int enemyType)

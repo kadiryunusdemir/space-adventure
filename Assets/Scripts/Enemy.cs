@@ -18,13 +18,15 @@ public class Enemy : MonoBehaviour
     private int actualHealth;
     private Vector3 shakeStr;
     private float shakeTime;
-    
+    private bool isDestructionInitiated = false;
+
     public void Init(Vector3 spawnPoint)
     {
         this.transform.position = spawnPoint;
         actualHealth = enemyHealth;
         shakeStr = Vector3.one / 10;
         shakeTime = 0.2f;
+        isDestructionInitiated = false;
         // transform.parent = spawnPoint;
         // transform.localScale = scale;
     }
@@ -37,7 +39,6 @@ public class Enemy : MonoBehaviour
     {
         rb2D.MovePosition(rb2D.position + Vector2.down * speed * Time.fixedDeltaTime);
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
@@ -60,8 +61,9 @@ public class Enemy : MonoBehaviour
             ObjectPoolManager.Instance.ReturnToPool(bullet);
         }
         
-        if (other.CompareTag("Player") || actualHealth <= 0)
+        if (other.CompareTag("Player") || actualHealth <= 0 && !isDestructionInitiated)
         {
+            isDestructionInitiated = true;
             if (other.CompareTag("Player"))
             {
                 other.transform.DOComplete();
@@ -76,6 +78,7 @@ public class Enemy : MonoBehaviour
 
             // UIManager.Instance.DisplayMessage(transform.position, enemyHealth.ToString());
             scoreSO.IncreaseInt(enemyHealth);
+
             meteorSO.IncreaseInt(1);
 
             transform.DOComplete();
@@ -84,6 +87,7 @@ public class Enemy : MonoBehaviour
             {
                 ObjectPoolManager.Instance.ReturnToPool(this.gameObject);
             });
+
         }
     }
 }
