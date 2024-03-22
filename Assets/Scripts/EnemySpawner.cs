@@ -45,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
                 //Debug.Log("Creating enemy: " + createdEnemyCount + "for enemy count: " + enemyCount);
                 int randomSpawnPointUnit = enemySpawnPoint[createdEnemyCount];
 
-                Vector3 spawnPoint = new Vector3(leftEdge.x + (randomSpawnPointUnit * spawnPointInterval), transform.position.y, 0);
+                Vector3 spawnPoint = new Vector3(leftEdge.x + (randomSpawnPointUnit * spawnPointInterval),(float) 7, 0);
 
                 // Instantiate the asteroid at the calculated position
 
