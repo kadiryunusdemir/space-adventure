@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waves:
   - WaveDensityPercentage: 80
-    fireDelay: 1000
+    fireDelay: 800
     enemyCount: 1
     enemySpawnPoint: [9]
     enemyType: [3]
