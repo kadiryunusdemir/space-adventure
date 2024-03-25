@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
 
         if (other.CompareTag("Bullet"))
         {
-            SoundManager.Instance.PlaySound(Enums.Sound.EnemyHit, transform.position);
+            // SoundManager.Instance.PlaySound(Enums.Sound.EnemyHit, transform.position);
 
             actualHealth -= 1;
             
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
             ObjectPoolManager.Instance.ReturnToPool(bullet);
         }
         
-        if (other.CompareTag("Player") || actualHealth <= 0 && !isDestructionInitiated)
+        if (!isDestructionInitiated && (other.CompareTag("Player") || actualHealth <= 0))
         {
             isDestructionInitiated = true;
             if (other.CompareTag("Player"))
@@ -74,7 +74,8 @@ public class Enemy : MonoBehaviour
             }
             
             explosionParticle.Play();
-            SoundManager.Instance.PlaySound(Enums.Sound.EnemyDie, transform.position);
+            // TODO: bu ses game managerdan tetiklenenleri eziyor
+            // SoundManager.Instance.PlaySound(Enums.Sound.EnemyDie, transform.position);
 
             // UIManager.Instance.DisplayMessage(transform.position, enemyHealth.ToString());
             scoreSO.IncreaseInt(enemyHealth);

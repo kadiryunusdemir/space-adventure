@@ -23,12 +23,22 @@ namespace Utilities
 
         public void ResetInt()
         {
+            if (Number == startingNumber)
+            {
+                return;
+            }
+            
             Number = startingNumber;
             IntChangeEvent.Invoke(Number);
         }
         
         public void SetInt(int amount)
         {
+            if (Number != amount)
+            {
+                return;
+            }
+            
             Number = amount;
             IntChangeEvent.Invoke(Number);
         }

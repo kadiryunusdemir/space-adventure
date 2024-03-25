@@ -66,7 +66,7 @@ public class GameManager : Singleton<GameManager>
                 Debug.Log("Level Playing: " + levelManager.GetCurrentLevelIndex());
                 Time.timeScale = 1f;
                 playerShooting.fireDelay = levelData.Waves[0].fireDelay;
-                await enemySpawner.CreateAsteroidShower2(levelData);
+                enemySpawner.CreateAsteroidShower(levelData);
                 SoundManager.Instance.StartGameSound();
                 break;
             case Enums.GameState.Win:
@@ -133,6 +133,7 @@ public class GameManager : Singleton<GameManager>
 
     private void PrepareNextLevel()
     {
+        enemySpawner.StopSpawner();
         ObjectPoolManager.Instance.ResetAll();
         scoreSO.ResetInt();
         healthSO.ResetInt();

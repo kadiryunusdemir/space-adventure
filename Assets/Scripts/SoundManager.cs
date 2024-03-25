@@ -42,11 +42,11 @@ public class SoundManager : Singleton<SoundManager>
 
      public void StopGameSound()
      {
-          thrusterAudioSource.Stop();
+          thrusterAudioSource.Pause();
      } 
      
      public void StartGameSound()
      {
-          thrusterAudioSource.Play();
+          thrusterAudioSource.UnPause();
      } 
 }
