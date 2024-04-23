@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 using Utilities;
 
@@ -78,6 +77,10 @@ public class UIManager : Singleton<UIManager>
                     () => PanelAction(Enums.GameState.MainMenu));
                 break;
             case Enums.GameState.GameEnded:
+                await uiPanel.DisplayPanel($"TEBRİKLER! Oyunu bitirdiniz.",
+                    "Tekrar oynamak ister misin?",
+                    () => PanelAction(Enums.GameState.Starting),
+                    () => PanelAction(Enums.GameState.MainMenu));
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(currentGameState), currentGameState, null);
