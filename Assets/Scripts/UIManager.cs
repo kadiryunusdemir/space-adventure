@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Utilities;
 
@@ -19,6 +20,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private UIPanel uiPanel;
     [SerializeField] private SurveyPanel surveyPanel;
     [SerializeField] private GameObject explosionTextParent;
+    [NonSerialized] public string selectedEmotionEnum;
 
     private void Start()
     {
@@ -91,6 +93,7 @@ public class UIManager : Singleton<UIManager>
     {
         await surveyPanel.DisplayPanel("Bölüm nasildi?", "Lütfen bir emojiyle oylar misin?");
         await UniTask.WaitUntil(() => surveyPanel.isButtonClicked );
+        selectedEmotionEnum = surveyPanel.selectedEmotionEnum.ToString();
         Debug.Log("Selected emoji: " + surveyPanel.selectedEmotionEnum);
     } 
 

@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private IntSO scoreSO;
     [SerializeField] private IntSO healthSO;
     [SerializeField] private IntSO meteorSO;
+    [SerializeField] private VideoRecording videoRecorder;
 
     private PlayerShooting playerShooting;
     private Action<Enums.GameState> gameStateAction;
@@ -51,6 +52,7 @@ public class GameManager : Singleton<GameManager>
                     break;
                 }
                 totalMeteorCount = GetTotalMeteorCount();
+                videoRecorder.startVideo();
                 Debug.Log("Meteor count: " + totalMeteorCount);
                 playerShooting.fireDelay = levelData.Waves[0].fireDelay;
                 enemySpawner.CreateAsteroidShower(levelData);
@@ -68,6 +70,8 @@ public class GameManager : Singleton<GameManager>
                 SoundManager.Instance.StopGameSound();
                 levelManager.IncreaseLevelIndex();
                 await uiManager.DisplayRelatedPanel(Enums.GameState.Win, currentLevelIndex);
+                string data = "Win " + levelManager.GetCurrentLevelIndex().ToString() + " " + uiManager.selectedEmotionEnum;
+                videoRecorder.stopVideo(data);
                 break;
             case Enums.GameState.Lose:
                 Debug.Log("Level Lose: " + currentLevelIndex);
@@ -75,6 +79,8 @@ public class GameManager : Singleton<GameManager>
                 SoundManager.Instance.PlaySound(Enums.Sound.Lose);
                 SoundManager.Instance.StopGameSound();
                 await uiManager.DisplayRelatedPanel(Enums.GameState.Lose, currentLevelIndex);
+                string data2 = "Lose " + levelManager.GetCurrentLevelIndex().ToString() + " " + uiManager.selectedEmotionEnum;
+                videoRecorder.stopVideo(data2);
                 break;
             case Enums.GameState.Paused:
                 Debug.Log("Level Paused: " + currentLevelIndex);
